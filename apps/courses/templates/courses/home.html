@@ -1,0 +1,25 @@
+{% extends 'courses/base.html' %}
+{% block content %}
+<div class="text-center mb-5">
+    <h1>Welcome to Smart LMS</h1>
+    <p class="lead">Learn Anything, Anytime, Anywhere</p>
+    <a href="{% url 'course_list' %}" class="btn btn-primary">Explore Courses</a>
+</div>
+
+<div class="row">
+{% for course in courses %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            {% if course.image %}
+            <img src="{{ course.image.url }}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+                <h5>{{ course.title }}</h5>
+                <p>{{ course.description|truncatewords:15 }}</p>
+                <a href="{% url 'course_detail' course.pk %}" class="btn btn-success">View Course</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}
